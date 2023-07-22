@@ -30,9 +30,3 @@ class Entity(IModular):
   def tick(self) -> None:
     for module in self.modules.values():
       module.tick()
-
-  def register(self, entity_list: list['Entity'] | None = None) -> None:
-    if entity_list is None:
-      return
-
-    entity_list.append(self)

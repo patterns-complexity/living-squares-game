@@ -20,3 +20,6 @@ class EntityManager():
 
     cls._entities.remove(entity)
 
+  @classmethod
+  def get_entities(cls: type['EntityManager']) -> list['Entity']:
+    return cls._entities
