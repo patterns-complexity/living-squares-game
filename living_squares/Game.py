@@ -4,7 +4,7 @@ from pyglet.shapes import Rectangle
 
 from random import randint
 
-from living_squares.Managers.EntityManager import EntityManager
+from living_squares.Managers.EntityManager.EntityManager import EntityManager
 from living_squares.Managers.InputManager.InputManager import InputManager
 
 from living_squares.Entities.PlayerEntity import PlayerEntity
@@ -20,6 +20,7 @@ class LivingSquaresGame():
 
     self.window.on_draw = self.draw
     self.window.on_key_press = InputManager.handle_press
+
 
   def draw(self) -> None:
     self.window.clear()

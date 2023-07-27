@@ -3,17 +3,20 @@ from __future__ import annotations
 from uuid import UUID, uuid4
 
 from living_squares.Interfaces.IIntegratable import IIntegratable
-
 from living_squares.Managers.ActionManager.Action import Action
-from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
-
 from living_squares.Managers.ActionManager.ActionManager import ActionManager
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+  from living_squares.Entities.Entity import Entity
+
 class Module(IIntegratable):
-  def __init__(self, id: UUID = uuid4()) -> None:
+  def __init__(self, parent: Entity, id: UUID = uuid4()) -> None:
     self.id: UUID = id
+    self.parent: Entity = parent
     self.name: str = self.__class__.__name__
-    self.observes_actions: list[ActionsEnum] = []
+    self.observes_actions: list[str] = []
     pass
 
   def __str__(self) -> str:

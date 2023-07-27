@@ -1,14 +1,13 @@
 from abc import ABC, abstractmethod
-
-from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
+from typing import Any
 
 class IQueueable(ABC):
   @property
   @abstractmethod
-  def name(self) -> ActionsEnum:
+  def name(self) -> str:
     pass
 
   @property
   @abstractmethod
-  def payload(self) -> dict[str, str | int]:
+  def payload(self) -> dict[ str, Any ]:
     pass

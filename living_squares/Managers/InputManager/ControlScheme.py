@@ -14,19 +14,19 @@ class ControlScheme(IMappable):
   def __init__(self) -> None:
     self._scheme: dict[int, Action] = {
       KeysEnum.W: Action(
-        ActionsEnum.MOVE,
+        ActionsEnum.MOVE.value,
         { "direction": "up"}
       ),
       KeysEnum.A: Action(
-        ActionsEnum.MOVE,
+        ActionsEnum.MOVE.value,
         { "direction": "left"}
       ),
       KeysEnum.S: Action(
-        ActionsEnum.MOVE,
+        ActionsEnum.MOVE.value,
         { "direction": "down"}
       ),
       KeysEnum.D: Action(
-        ActionsEnum.MOVE,
+        ActionsEnum.MOVE.value,
         { "direction": "right"}
       )
     }

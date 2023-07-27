@@ -1,15 +1,16 @@
 from living_squares.Interfaces.IQueuable import IQueueable
-from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
+
+from typing import Any
 
 class Action(IQueueable):
-  def __init__(self, name: ActionsEnum, payload: dict[str, str | int]) -> None:
-    self._name: ActionsEnum = name
-    self._payload: dict[str, str | int] = payload
+  def __init__(self, name: str, payload: dict[ str, Any ]) -> None:
+    self._name: str = name
+    self._payload: dict[ str, Any ] = payload
 
   @property
-  def name(self) -> ActionsEnum:
+  def name(self) -> str:
     return self._name
 
   @property
-  def payload(self) -> dict[str, str | int]:
+  def payload(self) -> dict[ str, Any ]:
     return self._payload

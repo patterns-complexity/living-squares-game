@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 from living_squares.Managers.ActionManager.Action import Action
-from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 
 from typing import TYPE_CHECKING
 
@@ -9,7 +8,7 @@ if TYPE_CHECKING:
   from living_squares.Modules.Module import Module
 
 class ActionManager():
-  _observers: dict[ActionsEnum, list[Module]] = {}
+  _observers: dict[str, list[Module]] = {}
 
   @classmethod
   def register_observer(cls, observer: Module) -> None:
