@@ -11,9 +11,9 @@ class Transform():
     self.scale: VectorObject2D = scale
     pass
 
-  def distance_to(self, other: 'Transform') -> int:
-    dx = other.position.x - self.position.x
-    dy = other.position.y - self.position.y
+  def distance_to(self, other: 'Transform') -> float:
+    dx: float = abs(other.position.x - self.position.x)
+    dy: float = abs(other.position.y - self.position.y)
 
     sum_squares = dx**2 + dy**2
 
@@ -23,13 +23,13 @@ class Transform():
     parent_scale: VectorObject2D = self.scale
     other_scale: VectorObject2D = other.scale
 
-    distance_x: int = abs(self.position.x - other.position.x)
-    distance_y: int = abs(self.position.y - other.position.y)
+    distance_x: float = abs(self.position.x - other.position.x)
+    distance_y: float = abs(self.position.y - other.position.y)
 
     is_overlapping_x: bool = distance_x < parent_scale.x + other_scale.x
     is_overlapping_y: bool = distance_y < parent_scale.y + other_scale.y
 
-    return is_overlapping_x or is_overlapping_y
+    return is_overlapping_x and is_overlapping_y
 
   def move(self, direction: str, amount: int) -> None:
     if direction == "up":

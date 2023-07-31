@@ -1,5 +1,6 @@
 #%% Project imports
 from living_squares.Game import Game
+from living_squares.Managers.CollisionManager.CollisionManager import CollisionManager
 
 from living_squares.Managers.EntityManager.EntityManager import EntityManager
 from living_squares.Managers.InputManager.InputManager import InputManager
@@ -21,6 +22,7 @@ class LivingSquaresGame(Game):
     self.player.tick()
     for entity in EntityManager.get_entities():
       entity.tick()
+    CollisionManager.tick()
 
   def prepare(self) -> None:
     super().prepare()
