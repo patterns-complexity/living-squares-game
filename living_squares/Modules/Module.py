@@ -3,11 +3,12 @@ from __future__ import annotations
 from uuid import UUID, uuid4
 
 from living_squares.Interfaces.IIntegratable import IIntegratable
+
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionManager import ActionManager
+from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 
-from typing import TYPE_CHECKING
-
+from typing import TYPE_CHECKING, Any
 if TYPE_CHECKING:
   from living_squares.Entities.Entity import Entity
 
@@ -38,10 +39,24 @@ class Module(IIntegratable):
     print(f"{self} received {action}")
     pass
 
-  def main(self) -> None:
+  def notify(
+    self,
+    action_name: ActionsEnum,
+    payload: dict[str, Any],
+    target: Entity | None = None
+  ) -> None:
+    if target is not None:
+      payload["target"] = target
+
+    ActionManager.send_action(
+      Action(
+        action_name.value,
+        payload
+      )
+    )
     pass
 
-  def on_key_press(self, symbol: int, modifiers: int) -> None:
+  def main(self) -> None:
     pass
 
   def tick(self) -> None:

@@ -10,7 +10,6 @@ class Entity(IModular):
   def __init__(self) -> None:
     self.id: UUID = uuid4()
     self.modules: dict[str, Module] = {}
-    EntityManager.register_entity(self)
 
   def __del__(self) -> None:
     EntityManager.unregister_entity(self)
@@ -29,6 +28,19 @@ class Entity(IModular):
 
   def destroy(self) -> None:
     del self
+
+  def setup(self) -> None:
+    pass
+
+  def _setup_modules(self) -> None:
+    for module in self.modules.values():
+      module.register_as_observer()
+    pass
+
+  def start(self) -> None:
+    self.setup()
+    self._setup_modules()
+    EntityManager.register_entity(self)
 
   def tick(self) -> None:
     for module in self.modules.values():

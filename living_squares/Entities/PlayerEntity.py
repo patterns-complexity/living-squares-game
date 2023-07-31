@@ -1,17 +1,45 @@
-from pyglet.shapes import ShapeBase
-
-from living_squares.Modules.HealthModule import HealthModule
-from living_squares.Modules.PositionModule import PositionModule
-from living_squares.Modules.RendererModule import RendererModule
+from pyglet.window import Window
+from pyglet.shapes import ShapeBase, Rectangle
 
 from living_squares.Entities.Entity import Entity
+from living_squares.Global.Transform import Transform, v
+
+from living_squares.Modules.HealthModule import HealthModule
+from living_squares.Modules.MovementModule import MovementModule
+from living_squares.Modules.PygletRendererModule import PygletRendererModule
+from living_squares.Modules.TransformsModule import TransformsModule
 
 class PlayerEntity(Entity):
-  def __init__(self, shape: ShapeBase):
+  def __init__(self, window:Window) -> None:
     super().__init__()
-    self.add_module(HealthModule(self, initial_health=100, max_health=150))
-    self.add_module(RendererModule(self, shape=shape))
-    self.add_module(PositionModule(self, x=shape.x, y=shape.y))
+    self.window: Window = window
 
-    for module in self.modules.values():
-      module.register_as_observer()
+  def setup(self) -> None:
+    x: int = self.window.width / 2
+    y: int = self.window.height / 2
+
+    scale_x: int = 10
+    scale_y: int = 10
+
+    transform: Transform = Transform(
+      v(x=x, y=y),
+      v(x=scale_x, y=scale_y),
+    )
+
+    self.add_module(PygletRendererModule(
+      self,
+      transform,
+      Rectangle,
+      color=(255, 0, 0)
+    ))
+    self.add_module(TransformsModule(
+      self,
+      transform
+    ))
+    self.add_module(MovementModule(
+      self,
+      transform
+    ))
+    self.add_module(HealthModule(
+      self, initial_health=100, max_health=150
+    ))
