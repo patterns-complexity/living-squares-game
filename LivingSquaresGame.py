@@ -1,7 +1,7 @@
 #%% Project imports
 from living_squares.Game import Game
-from living_squares.Managers.CollisionManager.CollisionManager import CollisionManager
 
+from living_squares.Managers.CollisionManager.CollisionManager import CollisionManager
 from living_squares.Managers.EntityManager.EntityManager import EntityManager
 from living_squares.Managers.InputManager.InputManager import InputManager
 

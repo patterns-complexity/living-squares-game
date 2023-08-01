@@ -1,21 +1,21 @@
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-  from living_squares.Entities.Entity import Entity
-
 from living_squares.Global.Transform import Transform
+
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionManager import ActionManager
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 from living_squares.Managers.CollisionManager.Collision import Collision
 from living_squares.Managers.EntityManager.EntityManager import EntityManager
+from living_squares.Managers.Manager.Manager import Manager
 
 from typing import TYPE_CHECKING
 
+from living_squares.Services.CollisionService import CollisionService
+
 if TYPE_CHECKING:
   from living_squares.Modules.TransformsModule import TransformsModule
+  from living_squares.Entities.Entity import Entity
 
-class CollisionManager():
+class CollisionManager(Manager):
   _all_collisions: list[Collision] = []
 
   @classmethod
@@ -67,7 +67,6 @@ class CollisionManager():
 
   @classmethod
   def tick(cls) -> None:
-    entities: list[Entity] = EntityManager.get_entities()
+    service: CollisionService = CollisionService()
+    cls.tick_threaded(service.run, cls.check_collisions)
 
-    for entity in entities:
-      cls.check_collisions(entity)

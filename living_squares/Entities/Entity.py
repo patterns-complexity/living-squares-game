@@ -14,6 +14,11 @@ class Entity(IModular):
   def __del__(self) -> None:
     EntityManager.unregister_entity(self)
 
+  def __eq__(self, __value: object) -> bool:
+    if isinstance(__value, Entity):
+      return self.id == __value.id
+    return False
+
   def add_module(self, module: Module) -> None:
     self.modules[module.name] = module
 
@@ -27,7 +32,7 @@ class Entity(IModular):
     return self.modules[name]
 
   def destroy(self) -> None:
-    del self
+    EntityManager.unregister_entity(self)
 
   def setup(self) -> None:
     pass
