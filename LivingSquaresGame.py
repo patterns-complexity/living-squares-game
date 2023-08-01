@@ -5,10 +5,11 @@ from living_squares.Managers.CollisionManager.CollisionManager import CollisionM
 from living_squares.Managers.EntityManager.EntityManager import EntityManager
 from living_squares.Managers.InputManager.InputManager import InputManager
 
-from living_squares.Entities.PlayerEntity import PlayerEntity
 from living_squares.Entities.FoodEntity import FoodEntity
+from living_squares.Entities.PlayerEntity import PlayerEntity
 
 from typing import TYPE_CHECKING
+
 if TYPE_CHECKING:
   from living_squares.Entities.Entity import Entity
 

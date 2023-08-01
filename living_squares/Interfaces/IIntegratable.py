@@ -4,6 +4,11 @@ from typing import Any
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+  from living_squares.Entities.Entity import Entity
+
 class IIntegratable(ABC):
   @abstractmethod
   def register_as_observer(self) -> None:

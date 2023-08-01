@@ -32,6 +32,9 @@ class PygletRendererModule(Module):
       self.shape.a = transform.scale.x,
       self.shape.b = transform.scale.y
 
+    self.shape.anchor_x = transform.scale.x / 2
+    self.shape.anchor_y = transform.scale.y / 2
+
     self.observes_actions: list[str] = [
       ActionsEnum.UPDATE_RENDER.value
     ]

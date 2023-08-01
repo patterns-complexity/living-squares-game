@@ -17,11 +17,11 @@ class FoodEntity(Entity):
     pass
 
   def setup(self) -> None:
-    x: int = randint(0, self.window.width)
-    y: int = randint(0, self.window.height)
+    x: float = float(randint(0, self.window.width))
+    y: float = float(randint(0, self.window.height))
 
-    scale_x: int = 5
-    scale_y: int = 5
+    scale_x: float = 5
+    scale_y: float = 5
 
     transform: Transform = Transform(
       v(x=x, y=y),

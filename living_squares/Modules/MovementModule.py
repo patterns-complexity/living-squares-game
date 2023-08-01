@@ -23,7 +23,7 @@ class MovementModule(Module):
     if action.name == ActionsEnum.MOVE.value:
       direction = action.payload["direction"]
 
-      self.transform.move(direction, 1)
+      self.transform.move(direction, 10)
 
       self.notify(
         ActionsEnum.UPDATE_POSITION,
