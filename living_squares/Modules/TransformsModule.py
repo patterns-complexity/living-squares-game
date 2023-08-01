@@ -1,8 +1,9 @@
-from living_squares.Entities.Entity import Entity
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 from living_squares.Modules.Module import Module
 from living_squares.Global.Transform import Transform
+
+from living_squares.Entities.Entity import Entity
 
 class TransformsModule(Module):
   def __init__(

@@ -1,5 +1,5 @@
 from pyglet.window import Window
-from pyglet.shapes import ShapeBase, Rectangle
+from pyglet.shapes import Rectangle
 
 from living_squares.Entities.Entity import Entity
 from living_squares.Global.Transform import Transform, v
@@ -15,11 +15,11 @@ class PlayerEntity(Entity):
     self.window: Window = window
 
   def setup(self) -> None:
-    x: int = self.window.width / 2
-    y: int = self.window.height / 2
+    x: float = self.window.width / 2
+    y: float = self.window.height / 2
 
-    scale_x: int = 10
-    scale_y: int = 10
+    scale_x: float = 10
+    scale_y: float = 10
 
     transform: Transform = Transform(
       v(x=x, y=y),

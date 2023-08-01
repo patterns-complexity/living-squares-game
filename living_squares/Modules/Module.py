@@ -1,4 +1,5 @@
 from __future__ import annotations
+from typing_extensions import override
 
 from uuid import UUID, uuid4
 
@@ -43,7 +44,7 @@ class Module(IIntegratable):
     self,
     action_name: ActionsEnum,
     payload: dict[str, Any],
-    target: Entity | None = None
+    target: Entity
   ) -> None:
     if target is not None:
       payload["target"] = target

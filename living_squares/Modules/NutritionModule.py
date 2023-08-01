@@ -1,11 +1,12 @@
-from living_squares.Entities.Entity import Entity
-from living_squares.Entities.FoodEntity import FoodEntity
-from living_squares.Entities.PlayerEntity import PlayerEntity
-from living_squares.Managers.ActionManager.ActionManager import ActionManager
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
-from living_squares.Modules.HealthModule import HealthModule
+from living_squares.Managers.CollisionManager.Collision import Collision
 from living_squares.Modules.Module import Module
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+  from living_squares.Entities.Entity import Entity
 
 class NutritionModule(Module):
   def __init__(self, parent: Entity) -> None:
@@ -18,22 +19,13 @@ class NutritionModule(Module):
     pass
 
   def on_action(self, action: Action) -> None:
-    if action.name == ActionsEnum.CONSUMED.value:
-      target_entity: object = action.payload["target"]
-      source_entity: object = action.payload["source"]
-
-      if isinstance(target_entity, FoodEntity) and isinstance(source_entity, PlayerEntity):
-        source_entity_module: Module = source_entity.module("HealthModule")
-        if isinstance(source_entity_module, HealthModule):
-
-          ActionManager.send_action(
-            Action(
-              ActionsEnum.FED.value,
-              {
-                "target": source_entity,
-                "source": target_entity,
-                "nutrition": self.nutrition,
-                "toxicity": self.toxicity
-              },
-            )
-          )
+    if action.name == ActionsEnum.COLLISION_DETECTED.value:
+      collision: Collision = action.payload["collision"]
+      if (collision.source.id == self.parent.id or collision.target.id == self.parent.id):
+        other: Entity = collision.source if collision.target.id == self.parent.id else collision.target
+        self.notify(
+          ActionsEnum.FED,
+          { "nutrition": self.nutrition, "toxicity": self.toxicity },
+          other
+        )
+        self.parent.destroy()

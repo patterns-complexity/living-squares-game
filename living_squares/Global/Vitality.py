@@ -21,6 +21,7 @@ class Vitality():
     if self.health <= 0:
       self.dead = True
       return True
+    return False
 
   def health_bounds_check(self) -> None:
     if self.health > self.max_health:
