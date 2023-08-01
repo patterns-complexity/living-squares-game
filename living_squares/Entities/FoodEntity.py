@@ -7,6 +7,7 @@ from living_squares.Entities.Entity import Entity
 
 from living_squares.Global.Transform import Transform, v
 
+from living_squares.Modules.NutritionModule import NutritionModule
 from living_squares.Modules.PygletRendererModule import PygletRendererModule
 from living_squares.Modules.TransformsModule import TransformsModule
 
@@ -39,3 +40,4 @@ class FoodEntity(Entity):
       self,
       transform
     ))
+    self.add_module(NutritionModule(self))

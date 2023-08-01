@@ -1,11 +1,7 @@
 from abc import ABC, abstractmethod
-from typing import Coroutine
+from typing import Any, Callable
 
 class IServing(ABC):
   @abstractmethod
-  async def run(self) -> Coroutine[None, None, None]:
-    pass
-
-  @abstractmethod
-  async def stop(self) -> Coroutine[None, None, None]:
+  def run(self, callback: Callable[[Any], None]) -> None:
     pass
