@@ -7,6 +7,7 @@ from living_squares.Global.Transform import Transform, v
 from living_squares.Modules.HealthModule import HealthModule
 from living_squares.Modules.MovementModule import MovementModule
 from living_squares.Modules.PygletRendererModule import PygletRendererModule
+from living_squares.Modules.SensorModule import SensorModule
 from living_squares.Modules.TransformsModule import TransformsModule
 
 class PlayerEntity(Entity):
@@ -42,4 +43,7 @@ class PlayerEntity(Entity):
     ))
     self.add_module(HealthModule(
       self, initial_health=100, max_health=150
+    ))
+    self.add_module(SensorModule(
+        self
     ))

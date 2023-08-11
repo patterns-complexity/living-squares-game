@@ -18,10 +18,6 @@ class HealthModule(Module):
     ]
     pass
 
-  def tick(self) -> None:
-    super().tick()
-    pass
-
   def on_action(self, action: Action) -> None:
     if not action.payload["target"] == self.parent:
       return
@@ -30,8 +26,9 @@ class HealthModule(Module):
       self.vitality.heal(action.payload["nutrition"])
       self.vitality.poison(action.payload["toxicity"])
 
-  def main(self) -> None:
-    if not self.vitality.is_alive_tick():
+  def main(self, delta_time: float) -> None:
+    vitality_tick_result: bool = self.vitality.is_alive_tick()
+    if vitality_tick_result is False:
       self.notify(
         ActionsEnum.DIED,
         {},

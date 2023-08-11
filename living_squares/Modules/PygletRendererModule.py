@@ -66,6 +66,6 @@ class PygletRendererModule(Module):
       self.update_shape(self.shape)
     pass
 
-  def main(self) -> None:
+  def main(self, delta_time: float) -> None:
     self.shape.draw()
     pass
