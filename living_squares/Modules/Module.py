@@ -1,5 +1,4 @@
 from __future__ import annotations
-from typing_extensions import override
 
 from uuid import UUID, uuid4
 
@@ -9,14 +8,12 @@ from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionManager import ActionManager
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 
-from typing import TYPE_CHECKING, Any
-if TYPE_CHECKING:
-  from living_squares.Entities.Entity import Entity
+from typing import Any
 
 class Module(IIntegratable):
-  def __init__(self, parent: Entity, id: UUID = uuid4()) -> None:
+  def __init__(self, parent: IIntegratable, id: UUID = uuid4()) -> None:
     self.id: UUID = id
-    self.parent: Entity = parent
+    self.parent: IIntegratable = parent
     self.name: str = self.__class__.__name__
     self.observes_actions: list[str] = []
     pass
@@ -44,7 +41,7 @@ class Module(IIntegratable):
     self,
     action_name: ActionsEnum,
     payload: dict[str, Any],
-    target: Entity
+    target: IIntegratable | None = None
   ) -> None:
     if target is not None:
       payload["target"] = target

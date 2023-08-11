@@ -1,6 +1,6 @@
 from pyglet.shapes import ShapeBase, Rectangle, Circle, Ellipse
-from living_squares.Entities.Entity import Entity
 from living_squares.Global.Transform import Transform
+from living_squares.Interfaces.IIntegratable import IIntegratable
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 from living_squares.Modules.Module import Module
 from living_squares.Managers.ActionManager.Action import Action
@@ -8,7 +8,7 @@ from living_squares.Managers.ActionManager.Action import Action
 class PygletRendererModule(Module):
   def __init__(
     self,
-    parent: Entity,
+    parent: IIntegratable,
     transform: Transform,
     shape_class: type[ShapeBase],
     color: tuple[int, int, int] = (255, 0, 0)

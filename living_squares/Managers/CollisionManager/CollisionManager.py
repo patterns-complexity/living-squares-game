@@ -7,7 +7,7 @@ from living_squares.Managers.CollisionManager.Collision import Collision
 from living_squares.Managers.EntityManager.EntityManager import EntityManager
 from living_squares.Managers.Manager.Manager import Manager
 
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Any
 
 from living_squares.Services.CollisionService import CollisionService
 
@@ -17,6 +17,7 @@ if TYPE_CHECKING:
 
 class CollisionManager(Manager):
   _all_collisions: list[Collision] = []
+  _service: CollisionService = CollisionService()
 
   @classmethod
   def is_stale_collision(cls, transforms_colliding: bool, collision: Collision) -> bool:
@@ -66,7 +67,5 @@ class CollisionManager(Manager):
         cls.notify(ActionsEnum.COLLISION_STOPPED, collision)
 
   @classmethod
-  def tick(cls) -> None:
-    service: CollisionService = CollisionService()
-    cls.tick_threaded(service.run, cls.check_collisions)
-
+  def run(cls, framerate: int = 120, *args: Any, **kwargs: Any) -> None:
+    cls.run_threaded(cls._service.run, cls.check_collisions, framerate)
