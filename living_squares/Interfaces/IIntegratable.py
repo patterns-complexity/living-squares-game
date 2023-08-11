@@ -15,7 +15,7 @@ class IIntegratable(ABC):
     pass
 
   @abstractmethod
-  def main(self) -> None:
+  def main(self, delta_time: float) -> None:
     pass
 
   @abstractmethod
@@ -32,5 +32,5 @@ class IIntegratable(ABC):
     pass
 
   @abstractmethod
-  def tick(self) -> None:
+  def tick(self, delta_time: float) -> None:
     pass

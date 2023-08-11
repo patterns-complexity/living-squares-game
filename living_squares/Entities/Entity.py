@@ -47,6 +47,6 @@ class Entity(IModular):
     self._setup_modules()
     EntityManager.register_entity(self)
 
-  def tick(self) -> None:
+  def tick(self, delta_time: float) -> None:
     for module in self.modules.values():
-      module.tick()
+      module.tick(delta_time)

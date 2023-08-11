@@ -1,4 +1,6 @@
 #%% Project imports
+from time import time
+
 from living_squares.Game import Game
 
 from living_squares.Managers.CollisionManager.CollisionManager import CollisionManager
@@ -17,13 +19,15 @@ class LivingSquaresGame(Game):
   def __init__(self) -> None:
     super().__init__()
     self.player: PlayerEntity
+    self.previous_time: float = time()
 
   def draw(self) -> None:
     super().draw()
-    self.player.tick()
+    current_time: float = time()
     for entity in EntityManager.get_entities():
-      entity.tick()
+      entity.tick(current_time - self.previous_time)
     CollisionManager.tick()
+    self.previous_time = current_time
 
   def prepare(self) -> None:
     super().prepare()

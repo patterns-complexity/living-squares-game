@@ -57,9 +57,9 @@ class Module(IIntegratable):
     )
     pass
 
-  def main(self) -> None:
+  def main(self, delta_time: float) -> None:
     pass
 
-  def tick(self) -> None:
-    self.main()
+  def tick(self, delta_time: float) -> None:
+    self.main(delta_time)
     pass

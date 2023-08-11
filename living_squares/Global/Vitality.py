@@ -13,6 +13,7 @@ class Vitality():
     self.poison_amount: int = poison_amount
     self.max_poison_amount: int = max_poison_amount
     self.dead: bool = dead
+    self.tick_counter: int = 0
 
   def death_check(self) -> bool:
     if self.dead:
@@ -54,6 +55,13 @@ class Vitality():
     if self.poison_amount > 0:
       self.detox(1)
       self.damage(1)
+    if self.tick_counter > 10:
+      self.tick_counter = 0
+      self.damage(1)
+    self.tick_counter += 1
+
+    print(self.health)
+
     self.health_bounds_check()
     if self.death_check():
       return False
