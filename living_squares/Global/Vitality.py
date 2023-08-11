@@ -60,8 +60,6 @@ class Vitality():
       self.damage(1)
     self.tick_counter += 1
 
-    print(self.health)
-
     self.health_bounds_check()
     if self.death_check():
       return False

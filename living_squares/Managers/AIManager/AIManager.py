@@ -15,4 +15,3 @@ class AIManager(Manager):
         { "direction": direction }
       )
     )
-
