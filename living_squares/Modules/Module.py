@@ -8,12 +8,15 @@ from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionManager import ActionManager
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 
-from typing import Any
+from typing import Any, TYPE_CHECKING
+
+if TYPE_CHECKING:
+  from living_squares.Entities.Entity import Entity
 
 class Module(IIntegratable):
-  def __init__(self, parent: IIntegratable, id: UUID = uuid4()) -> None:
+  def __init__(self, parent: Entity, id: UUID = uuid4()) -> None:
     self.id: UUID = id
-    self.parent: IIntegratable = parent
+    self.parent: Entity = parent
     self.name: str = self.__class__.__name__
     self.observes_actions: list[str] = []
     pass
@@ -41,7 +44,7 @@ class Module(IIntegratable):
     self,
     action_name: ActionsEnum,
     payload: dict[str, Any],
-    target: IIntegratable | None = None
+    target: Entity | None = None
   ) -> None:
     if target is not None:
       payload["target"] = target

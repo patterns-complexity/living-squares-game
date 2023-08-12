@@ -1,5 +1,5 @@
+from living_squares.Entities.Entity import Entity
 from living_squares.Global.Transform import Transform, v
-from living_squares.Interfaces.IIntegratable import IIntegratable
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 from living_squares.Modules.Module import Module
@@ -7,7 +7,7 @@ from living_squares.Modules.Module import Module
 class MovementModule(Module):
   def __init__(
     self,
-    parent: IIntegratable,
+    parent: Entity,
     transform: Transform,
   ) -> None:
     super().__init__(parent)

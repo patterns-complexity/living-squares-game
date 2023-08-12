@@ -1,5 +1,3 @@
-from typing import cast
-from living_squares.Interfaces.IIntegratable import IIntegratable
 from living_squares.Managers.ActionManager.Action import Action
 from living_squares.Managers.ActionManager.ActionsEnum import ActionsEnum
 from living_squares.Managers.CollisionManager.Collision import Collision
@@ -9,7 +7,7 @@ from living_squares.Modules.Module import Module
 from living_squares.Entities.Entity import Entity
 
 class NutritionModule(Module):
-  def __init__(self, parent: IIntegratable) -> None:
+  def __init__(self, parent: Entity) -> None:
     super().__init__(parent)
     self.nutrition: int = 15
     self.toxicity: int = 0
@@ -41,6 +39,6 @@ class NutritionModule(Module):
         self.notify(
           ActionsEnum.FED,
           { "nutrition": self.nutrition, "toxicity": self.toxicity },
-          cast(IIntegratable, other)
+          other,
         )
         self.parent.destroy()
