@@ -1,4 +1,3 @@
-from typing import Callable
 from pyglet import app
 from pyglet.window import Window
 
